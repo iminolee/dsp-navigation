@@ -5,6 +5,9 @@
   <env name="GAZEBO_MODEL_PATH" value="${GAZEBO_MODEL_PATH}:$(find gazebo_simulator)/models"/>
   <env name="GAZEBO_RESOURCE_PATH" value="${GAZEBO_RESOURCE_PATH}:$(find gazebo_simulator)/models"/>
 
+  <include file="$(find gazebo_simulator)/launch/spawn_go1.launch">
+  </include>
+
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="world_name" value="$(find gazebo_simulator)/worlds/hospital.world"/>
     <arg name="paused" value="false"/>

@@ -4,9 +4,17 @@ project(gazebo_simulator)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   gazebo_ros
+  std_msgs
+  tf
+  genmsg
 )
 
 find_package(gazebo REQUIRED)
+
+include_directories(
+    ${Boost_INCLUDEDIR}
+    ${catkin_INCLUDE_DIRS}
+)
 
 install(DIRECTORY launch
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch

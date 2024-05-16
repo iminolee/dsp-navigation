@@ -1,0 +1,11 @@
+build
+
+devel
+
+.catkin_workspace
+
+*~
+
+.DS_Store
+
+!readme.txt
