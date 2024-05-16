@@ -1,3 +1,4 @@
+# DSP-navigation: Dynamic Social Planner navigation
 ### 1. Clone repo
     git clone https://github.com/iminolee/dsp-navigation.git
 ### 2. Add sfm plugin
