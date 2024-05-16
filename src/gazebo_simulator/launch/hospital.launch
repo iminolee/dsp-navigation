@@ -7,9 +7,9 @@
 
   <include file="$(find gazebo_simulator)/launch/spawn_go1.launch">
   </include>
-
+  
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="$(find gazebo_simulator)/worlds/hospital.world"/>
+    <arg name="world_name" value="$(find gazebo_simulator)/worlds/hospital_with_actors.world"/>
     <arg name="paused" value="false"/>
     <arg name="use_sim_time" value="true"/>
     <arg name="gui" value="true"/>

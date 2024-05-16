@@ -7,6 +7,7 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   tf
   genmsg
+  gazebo_sfm_plugin
 )
 
 find_package(gazebo REQUIRED)
