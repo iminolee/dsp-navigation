@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+
+<launch>
+  <!-- Set environment variables for Gazebo -->
+  <env name="GAZEBO_MODEL_PATH" value="${GAZEBO_MODEL_PATH}:$(find gazebo_simulator)/models"/>
+  <env name="GAZEBO_RESOURCE_PATH" value="${GAZEBO_RESOURCE_PATH}:$(find gazebo_simulator)/models"/>
+
+  <!-- Launch the world in Gazebo -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find gazebo_simulator)/worlds/hospital_with_actors.world"/>
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
+
+  <!-- Arguments for spawning the robot and controller settings -->
+  <arg name="rname" default="go1"/>
+  <arg name="robot_namespace" default="/"/>
+  <arg name="x" default="0.07"/>
+  <arg name="y" default="13.9"/>
+  <arg name="z" default="0.5"/>
+  <arg name="roll" default="0.0"/>
+  <arg name="pitch" default="0.0"/>
+  <arg name="yaw" default="-1.6"/>
+  <arg name="rviz" default="false"/>
+  <!-- Debug mode will hung up the robot, use "true" or "false" to switch it. -->
+  <arg name="user_debug" default="false"/>
+
+  <!-- Define robot path -->
+  <arg name="robot_path" value="$(find gazebo_simulator)"/>
+
+  <!-- Spawn the robot in Gazebo -->
+  <group ns="$(arg robot_namespace)">
+    <param name="robot_description" command="$(find xacro)/xacro '$(arg robot_path)/urdf/robot.xacro'"/>
+
+    <node name="spawn_go1_model" pkg="gazebo_ros" type="spawn_model"
+        args="-x $(arg x)
+              -y $(arg y)
+              -z $(arg z)
+              -R $(arg roll)
+              -P $(arg pitch)
+              -Y $(arg yaw)
+              -unpause
+              -urdf
+              -param robot_description
+              -model go1
+              -robot_namespace $(arg robot_namespace)"/>
+  </group>
+
+  <!-- Load joint controller configurations from YAML file to parameter server -->
+  <rosparam file="$(arg robot_path)/config/robot_control.yaml" command="load"/>
+
+  <!-- Load the controllers -->
+  <node pkg="controller_manager" type="spawner" name="controller_spawner" respawn="false"
+        output="screen" ns="/$(arg rname)_gazebo" args="joint_state_controller
+        FL_hip_controller FL_thigh_controller FL_calf_controller
+        FR_hip_controller FR_thigh_controller FR_calf_controller
+        RL_hip_controller RL_thigh_controller RL_calf_controller
+        RR_hip_controller RR_thigh_controller RR_calf_controller "/>
+
+  <!-- Convert joint states to TF transforms for rviz, etc -->
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"
+        respawn="false" output="screen">
+    <remap from="/joint_states" to="/$(arg rname)_gazebo/joint_states"/>
+  </node>
+
+  <!-- Load the parameter unitree_controller -->
+  <include file="$(find unitree_controller)/launch/set_ctrl.launch">
+    <arg name="rname" value="$(arg rname)"/>
+  </include>
+
+  <!-- Execute junior_ctrl -->
+  <node name="junior_ctrl" pkg="unitree_guide" type="junior_ctrl" output="screen"/>
+
+  <!-- Servo node activation (commented out) -->
+  <!-- <node pkg="unitree_gazebo" type="servo" name="servo" required="true" output="screen"/> -->
+
+  <!-- World frame (commented out) -->
+  <!-- <node pkg="tf2_ros" type="static_transform_publisher" name="world_to_base" args="0.0 0.0 0.0 0.0 0.0 0.0 /world /base" /> -->
+
+</launch>

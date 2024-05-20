@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+
+<launch>
+  <!-- <arg name="multimaster" default="false"/> -->
+  <arg name="world_name" default="worlds/empty.world"/>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(arg world_name)"/>
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
+
+  <arg name="robot_namespace" default="/"/>
+  <arg name="x" default="0.0"/>
+  <arg name="y" default="0.0"/>
+  <arg name="z" default="0.0"/>
+  <arg name="roll" default="0.0"/>
+  <arg name="pitch" default="0.0"/>
+  <arg name="yaw" default="0.0"/>
+
+  <group ns="$(arg robot_namespace)">
+
+  <param name="robot_description" command="$(find xacro)/xacro '$(find gazebo_simulator)/urdf/robot.xacro'"/>
+
+  <!-- Spawn robot in gazebo -->
+    <node name="spawn_go1_model" pkg="gazebo_ros" type="spawn_model"
+        args="-x $(arg x)
+              -y $(arg y)
+              -z $(arg z)
+              -Y $(arg yaw)
+              -unpause
+              -urdf
+              -param robot_description
+              -model go1
+              -robot_namespace $(arg robot_namespace)"/>
+
+  </group>
+
+</launch>

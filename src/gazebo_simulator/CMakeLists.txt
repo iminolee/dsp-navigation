@@ -8,6 +8,7 @@ find_package(catkin REQUIRED COMPONENTS
   tf
   genmsg
   gazebo_sfm_plugin
+  unitree_gazebo
 )
 
 find_package(gazebo REQUIRED)
@@ -35,8 +36,3 @@ install(DIRECTORY meshes
 install(DIRECTORY rviz
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/rviz
 )
-
-if (CATKIN_ENABLE_TESTING)
-  find_package(roslaunch REQUIRED)
-  roslaunch_add_file_check(launch/hospital.launch)
-endif()

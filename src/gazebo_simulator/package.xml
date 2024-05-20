@@ -11,6 +11,8 @@
   <build_depend>roscpp</build_depend>
   <build_depend>gazebo_ros</build_depend>
   <build_depend>std_msgs</build_depend>
+  <build_depend>gazebo_sfm_plugin</build_depend>
+  <build_depend>unitree_gazebo</build_depend>
 
   <build_export_depend>roscpp</build_export_depend>
   <build_export_depend>gazebo_ros</build_export_depend>
@@ -19,6 +21,8 @@
   <exec_depend>roscpp</exec_depend>
   <exec_depend>gazebo_ros</exec_depend>
   <exec_depend>std_msgs</exec_depend>
+  <exec_depend>gazebo_sfm_plugin</exec_depend>
+  <exec_depend>unitree_gazebo</exec_depend>
 
   <export></export>
 </package>
