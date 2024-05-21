@@ -153,7 +153,7 @@
         <origin rpy="0 0 0" xyz="0.05 0 0.08"/>
     </xacro:lidar> -->
 
-    <xacro:vlp16_mount prefix="" parent_link="trunk" topic="velodyne_points" gpu="true">
+    <xacro:vlp16_mount prefix="" parent_link="trunk" lidar_topic="velodyne_points" gpu="true">
         <origin rpy="0 0 0" xyz="0.05 0 0.08"/>
     </xacro:vlp16_mount>
 
