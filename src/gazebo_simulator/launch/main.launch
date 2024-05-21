@@ -81,6 +81,6 @@
   <!-- <node pkg="tf2_ros" type="static_transform_publisher" name="world_to_base" args="0.0 0.0 0.0 0.0 0.0 0.0 /world /base" /> -->
 
   <!-- Launch rviz with the default configuration if the rviz argument is true -->
-  <node if="$(arg rviz)" name="rviz" pkg="rviz" type="rviz" required="true" output="screen"
+  <node if="$(arg rviz)" name="rviz" pkg="rviz" type="rviz" required="false" output="screen"
         args="-d $(find gazebo_simulator)/rviz/default.rviz"/>
 </launch>
