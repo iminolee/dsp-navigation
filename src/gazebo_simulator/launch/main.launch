@@ -72,7 +72,7 @@
   </include>
 
   <!-- Execute junior_ctrl -->
-  <node name="junior_ctrl" pkg="unitree_guide" type="junior_ctrl" output="screen"/>
+  <!-- <node name="junior_ctrl" pkg="unitree_guide" type="junior_ctrl" output="screen"/> -->
 
   <!-- Servo node activation (commented out) -->
   <!-- <node pkg="unitree_gazebo" type="servo" name="servo" required="true" output="screen"/> -->
