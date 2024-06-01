@@ -1,4 +1,4 @@
-# DSP-navigation: Dynamic Social Planner navigation
+# SCAN : Socially Crowded Awareness Navigation 
 
 ## Dependencies
 * Social Force Model library
@@ -21,11 +21,11 @@ sudo apt-get install ros-noetic-controller-interface ros-noetic-gazebo-ros-pkgs 
 
 ```
 cd
-git clone https://github.com/iminolee/dsp-navigation.git
+git clone https://github.com/iminolee/SCAN.git
 ```
 2. Build Workspace :
 ```
-cd dsp-navigation
+cd scan
 catkin_make
 source devel/setup.bash
 ```
